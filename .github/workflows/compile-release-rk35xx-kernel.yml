@@ -163,6 +163,8 @@ jobs:
           kernel_toolchain: ${{ inputs.kernel_toolchain }}
           kernel_sign: ${{ inputs.kernel_sign }}
           kernel_config: ${{ inputs.kernel_config }}
+          kernel_patch: ${{ inputs.kernel_patch }}
+          auto_patch: ${{ inputs.auto_patch }}
           compress_format: ${{ inputs.compress_format }}
 
       - name: Upload Kernel to Release
