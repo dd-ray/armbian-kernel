@@ -19,7 +19,7 @@ index 1a081603f552..ff5e10601ca5 100644
 @@ -1,7 +1,7 @@
  # SPDX-License-Identifier: GPL-2.0
 -dtb-$(CONFIG_ARCH_ROCKCHIP) += px30-evb.dtb
-+dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3566-oec-box-wxy4.dtb
++dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3566-onething-oec-box.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += px30-engicam-px30-core-ctouch2.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += px30-engicam-px30-core-ctouch2-of10.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += px30-engicam-px30-core-edimm2.2.dtb
