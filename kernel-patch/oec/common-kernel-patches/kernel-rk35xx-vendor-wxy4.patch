@@ -112,9 +112,9 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 ===================================================================
 diff --git a/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts b/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts
 new file mode 100644
---- /dev/null	(date 1747148541973)
-+++ b/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts	(date 1747148541973)
-@@ -0,0 +1,810 @@
+--- /dev/null	(date 1747177065923)
++++ b/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts	(date 1747177065923)
+@@ -0,0 +1,811 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
@@ -150,6 +150,7 @@ new file mode 100644
 +
 +	/delete-node/ vcc3v3-lcd0-n;
 +	/delete-node/ vcc3v3-lcd1-n;
++	/delete-node/ display-subsystem;
 +
 +	chosen: chosen {
 +		bootargs = "earlycon=uart8250,mmio32,0xfe660000 console=ttyFIQ0";
@@ -803,16 +804,16 @@ new file mode 100644
 +&pinctrl {
 +	pmic {
 +		pmic_int_l: pmic-int-l {
-+			rockchip,pins = <0 RK_PA2 1 &pcfg_pull_up>;
++			rockchip,pins = <0 RK_PA3 1 &pcfg_pull_up>;
 +		};
 +	};
 +
 +	usb {
 +		vcc5v0_host_vbus_en: vcc5v0-host-en {
-+			rockchip,pins = <0 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
++			rockchip,pins = <0 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
 +		};
 +		vcc5v0_otg_vbus_en: vcc5v0-otg-en {
-+			rockchip,pins = <0 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
++			rockchip,pins = <0 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
 +		};
 +	};
 +
