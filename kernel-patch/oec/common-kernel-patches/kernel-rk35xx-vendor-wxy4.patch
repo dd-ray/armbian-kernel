@@ -854,11 +854,11 @@ new file mode 100644
 +	snps,usb2-lpm-disable;
 +};
 +
-+&uart5 {
++&uart1 {
 +	status = "okay";
 +};
 +
-+&uart7 {
++&uart2 {
 +	status = "okay";
 +};
 +
