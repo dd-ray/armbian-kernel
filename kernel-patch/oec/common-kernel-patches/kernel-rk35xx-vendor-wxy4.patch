@@ -1,9 +1,3 @@
-Subject: [PATCH] Patching kernel rk35xx files arch/arm64/boot/dts/rockchip/Makefile
- arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts
- drivers/net/ethernet/stmicro/stmmac/dwmac-rk.c
-
-Signed-off-by: John Doe <john.doe@somewhere.on.planet>
----
 Index: drivers/net/ethernet/stmicro/stmmac/dwmac-rk.c
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
@@ -112,9 +106,9 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 ===================================================================
 diff --git a/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts b/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts
 new file mode 100644
---- /dev/null	(date 1747177065923)
-+++ b/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts	(date 1747177065923)
-@@ -0,0 +1,811 @@
+--- /dev/null	(date 1747296050041)
++++ b/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts	(date 1747296050041)
+@@ -0,0 +1,775 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
@@ -335,23 +329,11 @@ new file mode 100644
 +};
 +
 +&gpu_opp_table {
-+	/delete-node/ opp-200000000;
-+	/delete-node/ opp-300000000;
-+	/delete-node/ opp-400000000;
-+	/delete-node/ opp-600000000;
-+	/delete-node/ opp-700000000;
 +	/delete-node/ opp-j-600000000;
 +	/delete-node/ opp-m-800000000;
 +};
 +
 +&cpu0_opp_table {
-+	/delete-node/ opp-408000000;
-+	/delete-node/ opp-600000000;
-+	/delete-node/ opp-816000000;
-+	/delete-node/ opp-1008000000;
-+	/delete-node/ opp-1104000000;
-+	/delete-node/ opp-1416000000;
-+	/delete-node/ opp-1608000000;
 +	/delete-node/ opp-j-1008000000;
 +	/delete-node/ opp-j-1416000000;
 +	/delete-node/ opp-m-1608000000;
@@ -637,10 +619,6 @@ new file mode 100644
 +
 +&rk_rga {
 +	status = "okay";
-+};
-+
-+&rk_rga {
-+	status = "okay";
 +	rga-supply = <&vdd_logic>;
 +};
 +
@@ -668,7 +646,7 @@ new file mode 100644
 +};
 +
 +&rkvenc_mmu {
-+	status = "disabled";
++	status = "okay";
 +};
 +
 +&rknpu {
@@ -751,12 +729,6 @@ new file mode 100644
 +	status = "okay";
 +};
 +
-+&usbdrd_dwc3 {
-+	dr_mode = "host";
-+	extcon = <&usb2phy0>;
-+	status = "okay";
-+};
-+
 +&usbdrd30 {
 +	status = "okay";
 +};
@@ -827,11 +799,6 @@ new file mode 100644
 +	status = "okay";
 +};
 +
-+&csi2_dphy_hw {
-+	status = "okay";
-+};
-+
-+
 +&rkisp {
 +	status = "disabled";
 +};
@@ -840,18 +807,15 @@ new file mode 100644
 +	status = "disabled";
 +};
 +
-+&rkisp {
-+	rockchip,iq-feature = /bits/ 64 <0x1BFBF7FE67FF>;
-+	vi-supply = <&vdd_logic>;
-+};
-+
 +&usbdrd_dwc3 {
 +	phys = <&u2phy0_otg>;
++	dr_mode = "host";
 +	phy-names = "usb2-phy";
 +	extcon = <&usb2phy0>;
 +	maximum-speed = "high-speed";
 +	snps,dis_u2_susphy_quirk;
 +	snps,usb2-lpm-disable;
++	status = "okay";
 +};
 +
 +&uart1 {
@@ -869,18 +833,21 @@ new file mode 100644
 +	phy-mode = "rgmii";
 +	phy-supply = <&vcc_3v3>;
 +	pinctrl-names = "default";
-+	pinctrl-0 = <&gmac1m0_miim
-+				&gmac1m0_tx_bus2
-+				&gmac1m0_rx_bus2
-+				&gmac1m0_rgmii_clk
-+				&gmac1m0_clkinout
-+				&gmac1m0_rgmii_bus>;
++	pinctrl-0 = <&gmac1m1_miim
++				&gmac1m1_tx_bus2
++				&gmac1m1_rx_bus2
++				&gmac1m1_rgmii_clk
++				&gmac1m1_clkinout
++				&gmac1m1_rgmii_bus>;
++	snps,reset-gpio = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
 +	snps,reset-active-low;
 +	/* Reset time is 20ms, 100ms for rtl8211f */
 +	snps,reset-delays-us = <0 20000 100000>;
 +	tx_delay = <0x4f>;
 +	rx_delay = <0x24>;
 +	phy-handle = <&rgmii_phy1>;
++	snps,mixed-burst;
++    snps,tso;
 +	status = "okay";
 +};
 +
@@ -901,14 +868,6 @@ new file mode 100644
 +	freq_0 = <1056>;
 +};
 +
-+&combphy1_usq {
-+	status = "okay";
-+};
-+
-+&combphy2_psq {
-+	status = "okay";
-+};
-+
 +&pwm7 {
 +	status = "okay";
 +};
@@ -925,4 +884,3 @@ new file mode 100644
 +&csi2_dphy1 {
 +	status = "disabled";
 +};
-+
