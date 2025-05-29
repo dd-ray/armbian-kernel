@@ -107,9 +107,9 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 ===================================================================
 diff --git a/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts b/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts
 new file mode 100644
---- /dev/null	(date 1748500274661)
-+++ b/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts	(date 1748500274661)
-@@ -0,0 +1,618 @@
+--- /dev/null	(date 1748510115505)
++++ b/arch/arm64/boot/dts/rockchip/rk3566-onething-oec-box.dts	(date 1748510115505)
+@@ -0,0 +1,633 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Copyright (c) 2022 Rockchip Electronics Co., Ltd.
@@ -138,6 +138,11 @@ new file mode 100644
 +
 +	/delete-node/ display-subsystem;
 +
++	&firmware {
++	    scmi {
++	        status = "disabled";
++	    };
++	};
 +	adc_keys: adc-keys {
 +		compatible = "adc-keys";
 +		io-channels = <&saradc 0>;
@@ -289,6 +294,12 @@ new file mode 100644
 +			#power-domain-cells = <1>;
 +			#address-cells = <1>;
 +			#size-cells = <0>;
++			npu-supply = <&vdd_fixed>;
++			vpu-supply = <&vdd_logic>;
++			rga-supply = <&vdd_logic>;
++			rkvenc-supply = <&vdd_logic>;
++			rkvdec-supply = <&vdd_logic>;
++			gpu-supply = <&vdd_fixed>;
 +
 +			/* These power domains are grouped by VD_NPU */
 +			power-domain@RK3568_PD_NPU {
@@ -393,6 +404,12 @@ new file mode 100644
 +
 +	test-power {
 +		status = "okay";
++	};
++};
++
++&firmware {
++	scmi {
++		status = "disabled";
 +	};
 +};
 +
@@ -608,16 +625,14 @@ new file mode 100644
 +	snps,reset-gpio = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
 +	snps,reset-active-low;
 +	snps,reset-delays-us = <0 20000 100000>;
-+//Below are directly from wzxmc's dts. Hard to understand.
 +	assigned-clocks = <&cru SCLK_GMAC1_RX_TX>, <&cru SCLK_GMAC1>;
-+	assigned-clock-parents = <&cru SCLK_GMAC1_RMII_SPEED>;
++	assigned-clock-parents = <&cru SCLK_GMAC1_RGMII_SPEED>, <&gmac1_clkin>;
 +	pinctrl-0 = <&gmac1m1_miim
 +			&gmac1m1_tx_bus2
 +			&gmac1m1_rx_bus2
 +			&gmac1m1_rgmii_clk
 +			&gmac1m1_rgmii_bus
 +			&gmac1m1_clkinout>;
-+//End of above.
 +	tx_delay = <0x4f>;
 +	rx_delay = <0x2d>;
 +	phy-handle = <&rgmii_phy1>;
