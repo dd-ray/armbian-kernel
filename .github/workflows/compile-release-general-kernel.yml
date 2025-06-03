@@ -46,6 +46,14 @@ on:
         options:
           - all
           - dtbs
+      kernel_patch:
+        description: "Set the directory for kernel patches"
+        required: false
+        default: "kernel-patch/oec"
+        type: choice
+        options:
+          - kernel-patch/oec
+          - false
       kernel_toolchain:
         description: "Select the compilation toolchain"
         required: false
@@ -170,6 +178,8 @@ jobs:
           kernel_toolchain: ${{ inputs.kernel_toolchain }}
           kernel_sign: ${{ inputs.kernel_sign }}
           kernel_config: ${{ inputs.kernel_config }}
+          kernel_patch: ${{ inputs.kernel_patch }}
+          auto_patch: true
           compress_format: ${{ inputs.compress_format }}
 
       - name: Upload Kernel to Release
